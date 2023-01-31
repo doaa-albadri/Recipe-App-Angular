@@ -1,6 +1,8 @@
 <div class="row">
     <div class="col-xs-10">
-        <app-shopping-edit></app-shopping-edit>
+        <app-shopping-edit
+        (ingredientCreated)="onIngredientAdded($event)"
+        ></app-shopping-edit>
         <hr>
         <ul class="list-group">
             <a class="list-group-item" style="cursor: pointer;"
@@ -11,3 +13,8 @@
         </ul>
     </div>    
 </div>
+
+<!-- <h1>{{test}}</h1> -->
+<!-- 
+<input type="text" [(ngModel)]="newTest">
+<button (click)="onAddTest()">ADD TEST</button> -->
