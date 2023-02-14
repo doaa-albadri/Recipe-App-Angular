@@ -23,8 +23,8 @@ export class AuthGaurd implements CanActivate {
     | UrlTree
     | Observable<boolean | UrlTree>
     | Promise<boolean | UrlTree> {
-    // if im authenticated allow access / if not dont allow
-    return this.authService.isAuth().then((auth: boolean | unknown) => {
+    // if authenticated allow access / if not dont allow
+    return this.authService.isAuth().then((auth: boolean) => {
       if (auth) {
         return true;
       } else {

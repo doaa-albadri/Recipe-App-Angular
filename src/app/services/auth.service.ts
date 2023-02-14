@@ -8,8 +8,8 @@ export class AuthService {
   loggedIn = true;
 
   // giving it time before excecuting to resemble a real login
-  isAuth() {
-    const promise = new Promise((resolve, reject) => {
+  isAuth(): Promise<boolean> {
+    const promise = new Promise<boolean>((resolve, reject) => {
       setTimeout(() => {
         resolve(this.loggedIn);
       }, 800);

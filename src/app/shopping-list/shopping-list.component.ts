@@ -1,4 +1,12 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  OnInit,
+  OnDestroy,
+} from '@angular/core';
+import { Subscription } from 'rxjs';
 import { ShoppingListService } from '../services/shopping-list.service';
 import { Ingerdient } from '../shared/ingredient.model';
 
@@ -7,8 +15,9 @@ import { Ingerdient } from '../shared/ingredient.model';
   templateUrl: './shopping-list.component.html',
   styleUrls: ['./shopping-list.component.css'],
 })
-export class ShoppingListComponent implements OnInit {
+export class ShoppingListComponent implements OnInit, OnDestroy {
   ingredients!: Ingerdient[];
+  private igChangeSub!: Subscription;
 
   // ingredients: Ingerdient[] = [
   //   new Ingerdient('Apples', 5),
@@ -20,11 +29,15 @@ export class ShoppingListComponent implements OnInit {
   ngOnInit(): void {
     this.ingredients = this.shoppingListService.getIngredients();
     // here we're subscribing to this event and updating to the new sliced/updated array
-    this.shoppingListService.ingerdientsChanged.subscribe(
+    this.igChangeSub = this.shoppingListService.ingerdientsChanged.subscribe(
       (ingredients: Ingerdient[]) => {
         this.ingredients = ingredients;
       }
     );
+  }
+
+  ngOnDestroy() {
+    this.igChangeSub.unsubscribe();
   }
 
   // newTest = ''; //passing this from here up to the parent (app)
