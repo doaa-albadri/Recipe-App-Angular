@@ -8,6 +8,7 @@ import { Ingerdient } from '../shared/ingredient.model';
 })
 export class ShoppingListService {
   ingerdientsChanged = new Subject<Ingerdient[]>();
+  startedEditing = new Subject<number>();
 
   private ingredients: Ingerdient[] = [
     new Ingerdient('Apples', 5),
@@ -17,6 +18,10 @@ export class ShoppingListService {
   // we use slice here so we create a copy of the original data
   getIngredients() {
     return this.ingredients.slice();
+  }
+
+  getIngredient(index: number) {
+    return this.ingredients[index];
   }
 
   constructor() {}
@@ -32,6 +37,16 @@ export class ShoppingListService {
     //   this.onIngredientAdded(ingredient)
     // }
     this.ingredients.push(...ingredients);
+    this.ingerdientsChanged.next(this.ingredients.slice());
+  }
+
+  updateIngredient(index: number, newIngredient: Ingerdient) {
+    this.ingredients[index] = newIngredient;
+    this.ingerdientsChanged.next(this.ingredients.slice());
+  }
+
+  deleteIngredient(index: number) {
+    this.ingredients.splice(index, 1);
     this.ingerdientsChanged.next(this.ingredients.slice());
   }
 }
