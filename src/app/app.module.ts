@@ -18,6 +18,7 @@ import { AuthGaurd } from './services/auth-gaurd.service';
 import { RecipeStartComponent } from './recipes/recipe-start/recipe-start.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { RecipeService } from './services/recipe.service';
+import { ShortenPipe } from './pipes/shorten.pipe';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { RecipeService } from './services/recipe.service';
     DropdownDirective,
     RecipeStartComponent,
     RecipeEditComponent,
+    ShortenPipe,
   ],
   imports: [BrowserModule, FormsModule, AppRoutingModule, ReactiveFormsModule],
   providers: [ShoppingListService, AuthService, AuthGaurd, RecipeService],
