@@ -15,6 +15,7 @@ const appRoutes: Routes = [
   {
     path: 'recipes',
     component: RecipesComponent,
+    canActivate: [AuthGaurd],
     children: [
       { path: '', component: RecipeStartComponent },
       { path: 'new', component: RecipeEditComponent },
@@ -31,7 +32,8 @@ const appRoutes: Routes = [
     ],
   },
   //   add canActivate and the gaurd will affect the route and its children
-  { path: 'list', canActivate: [AuthGaurd], component: ShoppingListComponent },
+  // { path: 'list', canActivate: [AuthGaurd], component: ShoppingListComponent },
+  { path: 'list', component: ShoppingListComponent },
   { path: 'auth', component: AuthComponent },
 ];
 
