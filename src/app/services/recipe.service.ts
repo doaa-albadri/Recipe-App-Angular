@@ -11,22 +11,29 @@ import { ShoppingListService } from './shopping-list.service';
 export class RecipeService {
   recipesChanged = new Subject<Recipe[]>();
 
-  private recipes: Recipe[] = [
-    new Recipe(
-      'Test Recipe',
-      'This is a test.',
-      'https://assets.bonappetit.com/photos/61b775620fb3fcc4cbf036c1/master/pass/20211208%20Spaghetti%20Squash%20with%20Tomato%20Sauce%20and%20Mozarella%20LEDE.jpg',
-      [new Ingerdient('Meat', 1), new Ingerdient('Tomato', 2)]
-    ),
-    new Recipe(
-      'Test Recipe 2',
-      'This is a test 2.',
-      'https://assets.bonappetit.com/photos/61b775620fb3fcc4cbf036c1/master/pass/20211208%20Spaghetti%20Squash%20with%20Tomato%20Sauce%20and%20Mozarella%20LEDE.jpg',
-      [new Ingerdient('Cucumber', 6), new Ingerdient('Bread', 3)]
-    ),
-  ];
+  // private recipes: Recipe[] = [
+  //   new Recipe(
+  //     'Test Recipe',
+  //     'This is a test.',
+  //     'https://assets.bonappetit.com/photos/61b775620fb3fcc4cbf036c1/master/pass/20211208%20Spaghetti%20Squash%20with%20Tomato%20Sauce%20and%20Mozarella%20LEDE.jpg',
+  //     [new Ingerdient('Meat', 1), new Ingerdient('Tomato', 2)]
+  //   ),
+  //   new Recipe(
+  //     'Test Recipe 2',
+  //     'This is a test 2.',
+  //     'https://assets.bonappetit.com/photos/61b775620fb3fcc4cbf036c1/master/pass/20211208%20Spaghetti%20Squash%20with%20Tomato%20Sauce%20and%20Mozarella%20LEDE.jpg',
+  //     [new Ingerdient('Cucumber', 6), new Ingerdient('Bread', 3)]
+  //   ),
+  // ];
+
+  private recipes: Recipe[] = [];
 
   constructor(private shoppingListService: ShoppingListService) {}
+
+  setRecipes(recipes: Recipe[]) {
+    this.recipes = recipes;
+    this.recipesChanged.next(this.recipes.slice());
+  }
 
   getRecipes() {
     return this.recipes.slice();

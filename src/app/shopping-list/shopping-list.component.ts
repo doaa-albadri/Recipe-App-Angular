@@ -61,4 +61,9 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
   onIngredientAdded(ingredient: Ingerdient) {
     this.shoppingListService.onIngredientAdded(ingredient);
   }
+
+  // TESTING OUT HTTP REQUESTS
+  onCreatePost(postData: { title: string; content: string }) {
+    console.log(postData);
+  }
 }

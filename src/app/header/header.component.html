@@ -12,20 +12,28 @@
                 <!-- use it with the li not a -->
 
                 <!-- we use routerLinkActiveOptions to tell angular to ONLY go for the path if its exactly what we set -->
-                <li routerLinkActive="active"
+                <li *ngIf="isAuth" routerLinkActive="active"
                 [routerLinkActiveOptions]="{exact: true}">
                     <a routerLink="/recipes" >
                         Recipes</a></li>
                 <!-- we use this syntax when we have an additional route -->
                 <!-- example: [routerLink]="['/list', 'additional']" (additional ones always without /) -->
                 <li routerLinkActive="active"><a [routerLink]="['/list']" >Shopping List</a></li>
+                <li routerLinkActive="active" *ngIf="!isAuth"><a [routerLink]="['/auth']" >Auth</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown" appDropdown>
+                <li *ngIf="isAuth">
+                    <a  style="cursor: pointer;" (click)="onLogout()">Logout</a>
+                </li>
+                <li *ngIf="isAuth" class="dropdown" appDropdown>
                     <a style="cursor: pointer;" class="dropdown-toggle" role="button">Manage <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a style="cursor: pointer;">Save Data</a></li>
-                        <li><a style="cursor: pointer;">Fetch Data</a></li>
+                        <li><a style="cursor: pointer;"
+                        (click)="onSaveData()"
+                            >Save Data</a></li>
+                        <li><a style="cursor: pointer;"
+                            (click)="onFetchData()"
+                            >Fetch Data</a></li>
                     </ul>
                 </li>
             </ul>

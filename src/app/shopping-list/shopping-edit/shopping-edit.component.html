@@ -20,13 +20,26 @@
             </div>
             <div class="row ">
                 <div class="col-xs-12" style="display: flex; column-gap: 10px;">
-                    <button class="btn btn-success" type="submit"
+            <button class="btn btn-success" type="submit"
                     [disabled]="!f.valid"
                    >{{ editMode === true ? 'Update' : 'Add'}}</button>
                     <button class="btn btn-danger" type="button" [disabled]="!editMode" (click)="onDelete()">Delete</button>
                     <button class="btn btn-primary" type="reset"  (click)="onClear()">Clear</button>
                 </div>
             </div>
+
+            <div class="row ">
+                <div class="col-xs-12" style="display: flex; column-gap: 10px;">
+                    <p *ngIf="isFetching">Loading...</p>
+                    <ul class="list-group" *ngIf="loadedItems.length >= 1 && !isFetching">
+                        <li class="list-group-item" *ngFor="let item of loadedItems">
+                            <p>{{item.name}}</p>
+                            <p>{{item.amount}}</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </form>
+       
     </div>
 </div>
