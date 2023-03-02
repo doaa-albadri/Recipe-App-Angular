@@ -52,4 +52,9 @@ export class AuthComponent {
 
     form.reset();
   }
+
+  onHandleError() {
+    // setting error to null means its no longer there so ngIf can remove the component
+    this.error = null;
+  }
 }
